@@ -80,6 +80,47 @@
           </div>
         </div>
 
+        <div class="col-lg-8">
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">
+                <i class="bi bi-table"></i> Daftar Barang
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-primary">
+                    <tr>
+                      <th><i class="bi bi-box"></i> Nama Barang</th>
+                      <th><i class="bi bi-graph-up"></i> Stok</th>
+                      <th><i class="bi bi-cash-coin"></i> Harga</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div>
+                          <strong>Laptop Gaming ASUS ROG</strong>
+                          <div class="text-muted small">Laptop gaming performa tinggi dengan GPU RTX</div>
+                        </div>
+                      </td>
+                      <td><strong class="text-primary">Rp 25.000.000</strong></td>
+                      <td class="text-center">
+                        <button class="btn btn-sm btn-warning">
+                          <i class="bi bi-pencil-square"></i> Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger">
+                          <i class="bi bi-trash"></i> Hapus
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
