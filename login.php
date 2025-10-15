@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - Repository Barang</title>
 
-    <!-- Bootstrap & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
-    <!-- Style tambahan -->
     <style>
       body {
         font-family: 'Poppins', sans-serif;
@@ -93,20 +91,5 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-      // Simulasi login sederhana
-      document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-
-        if (user === 'admin' && pass === '12345') {
-          alert('Login berhasil! Selamat datang, ' + user + ' 👋');
-          window.location.href = 'index.html'; // arahkan ke halaman utama repository barang
-        } else {
-          alert('Username atau password salah ❌');
-        }
-      });
-    </script>
   </body>
 </html>
