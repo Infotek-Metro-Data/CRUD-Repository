@@ -1,95 +1,81 @@
+<?php
+include("koneksi.php");
+session_start();
+
+$msg = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    try {
+        $conn = koneksi();
+
+        $stmt = $conn->prepare("
+            SELECT id_login, name, email, password, user_type
+            FROM `login`
+            WHERE email = :u OR name = :u
+            LIMIT 1
+        ");
+        $stmt->execute([':u' => $username]);
+        $user = $stmt->fetch();
+
+        if (!$user) {
+            $msg = "Akun tidak ditemukan!";
+        } elseif (!password_verify($password, $user['password'])) {
+            $msg = "Password salah!";
+        } else {
+            $_SESSION['id_login']  = $user['id_login'];
+            $_SESSION['name']      = $user['name'];
+            $_SESSION['user_type'] = $user['user_type'];
+
+            if ($user['user_type'] === 'admin') {
+                header("Location: admin.php");
+            } else {
+                header("Location: index.php");
+            }
+            exit;
+        }
+    } catch (PDOException $e) {
+        $msg = "Terjadi kesalahan database: " . $e->getMessage();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Repository Barang</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Repository Barang</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-    <style>
-      body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #007bff, #6ec1ff);
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .login-card {
-        background: #fff;
-        border: none;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        width: 100%;
-        max-width: 420px;
-      }
-
-      .login-header {
-        background-color: #007bff;
-        color: #fff;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        text-align: center;
-        padding: 30px 20px;
-      }
-
-      .login-header i {
-        font-size: 3rem;
-        margin-bottom: 10px;
-      }
-
-      .btn-primary {
-        background-color: #007bff;
-        border: none;
-      }
-
-      .btn-primary:hover {
-        background-color: #0056d2;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="login-card shadow">
-      <div class="login-header">
-        <i class="bi bi-box"></i>
-        <h3 class="fw-bold mt-2">Repository Barang</h3>
-        <p class="mb-0">Silakan masuk untuk melanjutkan</p>
-      </div>
-
-      <div class="card-body p-4">
-        <form id="loginForm">
-          <div class="mb-3">
-            <label for="username" class="form-label">
-              <i class="bi bi-person-fill"></i> Username
-            </label>
-            <input type="text" class="form-control" id="username" placeholder="Masukkan username" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="password" class="form-label">
-              <i class="bi bi-lock-fill"></i> Kata sandi
-            </label>
-            <input type="password" class="form-control" id="password" placeholder="Masukkan password" required>
-          </div>
-
-          <div class="d-grid mb-3">
-            <button type="submit" class="btn btn-primary">
-              <i class="bi bi-box-arrow-in-right"></i> Masuk
-            </button>
-          </div>
-
-          <div class="text-center text-muted small">
-            © 2025 Repository Barang — Semua Hak Dilindungi
-          </div>
-        </form>
-      </div>
+<body class="bg-primary bg-gradient d-flex align-items-center justify-content-center" style="height:100vh;">
+  <div class="card shadow rounded-4" style="max-width:420px; width:100%;">
+    <div class="card-header bg-primary text-white text-center">
+      <h3>Login Repository Barang</h3>
     </div>
+    <div class="card-body">
+      <?php if ($msg): ?>
+        <div class="alert alert-warning"><?= htmlspecialchars($msg) ?></div>
+      <?php endif; ?>
+      <form method="post">
+        <div class="mb-3">
+          <label>Username / Email</label>
+          <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-primary">Masuk</button>
+        </div>
+        <p class="text-center small">Belum punya akun? <a href="registrasi.php">Daftar</a></p>
+      </form>
+    </div>
+  </div>
+</body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-  </body>
 </html>
