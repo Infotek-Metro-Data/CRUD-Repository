@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <div class="row g-4">
-      <!-- Form untuk tambah barang di sebelah kiri -->
+
       <div class="col-lg-4">
         <div class="card shadow-sm border-0">
           <div class="card-header bg-primary text-white">
@@ -106,7 +106,6 @@ if (isset($_GET['id'])) {
         </div>
       </div>
 
-      <!-- Tabel Daftar Barang di sebelah kanan -->
       <div class="col-lg-8">
         <h3 class="mb-4">Daftar Barang</h3>
         <table class="table table-striped">
