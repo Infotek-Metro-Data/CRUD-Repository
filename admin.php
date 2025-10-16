@@ -8,14 +8,36 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
   </head>
   <body class="bg-light">
-    <div class="bg-primary py-5 text-white mb-5">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
       <div class="container">
-        <h1 class="display-4 fw-bold mb-2">
+        <a class="navbar-brand" href="#">
           <i class="bi bi-clipboard-check"></i> Tabel Absensi
-        </h1>
-        <p class="lead">Sistem Pencatatan Repository Barang</p>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <i class="bi bi-house-door"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="bi bi-person"></i> Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-outline-light ms-2" type="button">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
 
     <div class="container mb-5">
       <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -23,7 +45,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 
-      <!-- Form Input -->
+   
       <div class="row g-4">
         <div class="col-lg-4">
           <div class="card shadow-sm border-0">
@@ -56,7 +78,7 @@
           </div>
         </div>
 
-        <!-- Tabel Absensi -->
+
         <div class="col-lg-8">
           <div class="card shadow-sm border-0">
             <div class="card-header bg-primary text-white">
@@ -88,7 +110,7 @@
       </div>
     </div>
 
-    <!-- Edit Modal -->
+
     <div class="modal fade" id="editModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -117,6 +139,6 @@
       </div>
     </div>
 
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
