@@ -1,5 +1,5 @@
 <?php
-include("koneksi.php");
+include("/xampp/htdocs/CRUD/CRUD-Repository/View/Controllers/koneksi.php");
 
 $msg = '';
 

@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . "/function.php";
+require_once __DIR__ . "/Controllers/getController.php";
+require_once __DIR__ . "/Controllers/updateController.php";
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];

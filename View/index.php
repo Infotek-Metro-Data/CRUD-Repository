@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . "/function.php";
-require_once __DIR__ . "/auth.php";
+require_once __DIR__ . "/Controllers/getController.php";
+require_once __DIR__ . "/Controllers/postController.php";
+require_once __DIR__ . "/Controllers/deleteController.php";
+require_once('/xampp/htdocs/CRUD/CRUD-Repository/auth.php');
 require_login();
 
 if (isset($_POST['tambah'])) {
@@ -68,9 +70,9 @@ if (isset($_GET['id'])) {
               </a>
             </li>
             <li class="nav-item">
-              <button class="btn btn-outline-light ms-2" type="button">
+              <a href="logout.php" class="btn btn-outline-light ms-2">
                 <i class="bi bi-box-arrow-right"></i> Logout
-              </button>
+              </a>
             </li>
           </ul>
         </div>
