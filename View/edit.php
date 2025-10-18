@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . "/function.php";
+require_once __DIR__ . "/Controllers/getController.php";
+require_once __DIR__ . "/Controllers/updateController.php";
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
@@ -38,18 +39,17 @@ if (isset($_POST['editUser'])) {
       vertical-align: middle;
     }
 
-    /* CSS untuk memusatkan form */
     .form-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Full height */
+      height: 100vh; 
       padding: 20px;
     }
 
     .form-card {
       width: 100%;
-      max-width: 600px; /* Lebar maksimum untuk form */
+      max-width: 600px; 
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
   </style>
@@ -59,9 +59,8 @@ if (isset($_POST['editUser'])) {
   <div class="bg-primary py-5 text-white mb-5">
     <div class="container">
       <h1 class="display-4 fw-bold mb-2">
-        <i class="bi bi-box"></i> Repository Barang
+        <i class="bi bi-box"></i> Edit Repository Barang
       </h1>
-      <p class="lead">Sistem Manajemen Barang yang Menyenangkan & Modern</p>
     </div>
   </div>
 

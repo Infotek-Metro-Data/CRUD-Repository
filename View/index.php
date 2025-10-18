@@ -1,5 +1,9 @@
 <?php
-require_once __DIR__ . "/function.php";
+require_once __DIR__ . "/Controllers/getController.php";
+require_once __DIR__ . "/Controllers/postController.php";
+require_once __DIR__ . "/Controllers/deleteController.php";
+require_once('/xampp/htdocs/CRUD/CRUD-Repository/auth.php');
+require_login();
 
 if (isset($_POST['tambah'])) {
   $barang     = $_POST['barang'];
@@ -44,12 +48,35 @@ if (isset($_GET['id'])) {
 </head>
 
 <body class="bg-light">
-  <div class="bg-primary py-5 text-white mb-5">
+  <div class="bg-primary py-3 text-white mb-5">
     <div class="container">
-      <h1 class="display-4 fw-bold mb-2">
-        <i class="bi bi-box"></i> Repository Barang
-      </h1>
-      <p class="lead">Sistem Manajemen Barang yang Menyenangkan & Modern</p>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+          <i class="  bi bi-box"></i> Repository Barang
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <i class="bi bi-house-door"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="bi bi-person"></i> Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="logout.php" class="btn btn-outline-light ms-2">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
   </div>
 
