@@ -1,5 +1,5 @@
 <?php
-define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] . "/CRUD/CRUD-Repository");
+define('ROOT_PATH', __DIR__);
 
 define('CONTROLLER_PATH', ROOT_PATH . "/View/Controllers");
 
