@@ -1,9 +1,14 @@
+
 <?php
-require_once __DIR__ . "/Controllers/getController.php";
-require_once __DIR__ . "/Controllers/postController.php";
-require_once __DIR__ . "/Controllers/deleteController.php";
-require_once('/xampp/htdocs/CRUD/CRUD-Repository/auth.php');
+require_once __DIR__ . '/../config.php';
+
+require_once(CONTROLLER_PATH . "/getController.php");
+require_once(CONTROLLER_PATH . "/postController.php");
+require_once(CONTROLLER_PATH . "/deleteController.php");
+
+require_once('../auth.php');
 require_login();
+
 
 if (isset($_POST['tambah'])) {
   $barang     = $_POST['barang'];
@@ -13,14 +18,14 @@ if (isset($_POST['tambah'])) {
 
   tambahDataUser($barang, $deskripsi, $harga, $tanggal);
 
-  header("location: index.php");
+  header("location: user.php");
 }
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
 
   hapusDataUser($id);
 
-  header("location: index.php");
+  header("location: user.php");
 }
 
 

@@ -1,43 +1,57 @@
 <?php
-include("/xampp/htdocs/CRUD/CRUD-Repository/View/Controllers/koneksi.php");
+require_once __DIR__ . '/../config.php';
 session_start();
 
-$msg = '';
+$msg = '';  
+$login_status = false;  
+
+include(__DIR__ . "/Controllers/koneksi.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = trim($_POST['username'] ?? '');
   $password = $_POST['password'] ?? '';
 
-  try {
-    $conn = koneksi();
+  
+  if (empty($username) || !filter_var($username, FILTER_VALIDATE_EMAIL)) {
+    $msg = "Email tidak valid!";
+  } elseif (empty($password)) {
+    $msg = "Password tidak boleh kosong!";
+  } else {
+    try {
+      $conn = koneksi();
 
-    $stmt = $conn->prepare("
+      $stmt = $conn->prepare("
             SELECT id_login, name, email, password, user_type
             FROM `login`
             WHERE email = :u OR name = :u
             LIMIT 1
         ");
-    $stmt->execute([':u' => $username]);
-    $user = $stmt->fetch();
+      $stmt->execute([':u' => $username]);
+      $user = $stmt->fetch();
 
-    if (!$user) {
-      $msg = "Akun tidak ditemukan!";
-    } elseif (!password_verify($password, $user['password'])) {
-      $msg = "Password salah!";
-    } else {
-      $_SESSION['id_login']  = $user['id_login'];
-      $_SESSION['name']      = $user['name'];
-      $_SESSION['user_type'] = $user['user_type'];
-
-      if ($user['user_type'] === 'admin') {
-        header("Location: admin.php");
+      if (!$user) {
+        $msg = "Akun tidak ditemukan!";
+        $login_status = false; 
+      } elseif (!password_verify($password, $user['password'])) {
+        $msg = "Password salah!";
+        $login_status = false; 
       } else {
-        header("Location: index.php");
+        $_SESSION['id_login']  = $user['id_login'];
+        $_SESSION['name']      = $user['name'];
+        $_SESSION['user_type'] = $user['user_type'];
+        $login_status = true; 
+
+        if ($user['user_type'] === 'admin') {
+          header("Location: admin.php");
+        } else {
+          header("Location: user.php");
+        }
+        exit;
       }
-      exit;
+    } catch (PDOException $e) {
+      $msg = "Terjadi kesalahan database: " . $e->getMessage();
+      $login_status = false; 
     }
-  } catch (PDOException $e) {
-    $msg = "Terjadi kesalahan database: " . $e->getMessage();
   }
 }
 ?>

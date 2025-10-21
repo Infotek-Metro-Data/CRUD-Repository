@@ -6,7 +6,7 @@ if(isset($_GET['id'])){
     $id = $_GET['id'];
     $data = ambilSatuDataUser($id)->fetch();
 }else{
-    header("location: index.php");
+    header("location: user.php");
 }
 
 if (isset($_POST['editUser'])) {
@@ -17,7 +17,7 @@ if (isset($_POST['editUser'])) {
 
   editDataUser($data['id'], $barang, $deskripsi, $harga, $tanggal);
 
-  header("location: index.php");
+  header("location: user.php");
 }
 ?>
 
